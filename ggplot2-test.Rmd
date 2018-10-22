@@ -9,26 +9,62 @@ output: html_document
 
 We're learning ggplot2 It's going to be amazing!
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## Load packages
+
+
+```{r}
+
+# install and load tidyverse which is a package of packages
+install.packages("tidyverse")
+library(tidyverse)
 ```
 
-## R Markdown
+## Load National Parks data
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#National Parks in California
+ca <- read.csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/ca.csv") 
 
-```{r cars}
-summary(cars)
+#Acadia National Park
+acadia <- read.csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/acadia.csv")
+
+#Southeast US National Parks
+se <- read.csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/se.csv")
+
+#2016 Visitation for all Pacific West National Parks
+visit_16 <- read.csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/visit_16.csv")
+
+#All Nationally designated sites in Massachusetts
+mass <- read.csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/mass.csv")
+
+
+
+```
+# explore data
+
+```{R}
+
+head(se)
+
+View(SE)
+
+
 ```
 
-## Including Plots
+#play with data where geom_point is a scatter plot
 
-You can also embed plots, for example:
+```{R}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+ggplot(data = se) +
+  geom_point(aes (x = year, y =visitors, color=state)) +
+  theme_minimal()+
+  xlab("Year") +
+  ylab("Visitors") +
+  ggtitle("Which Southeastern State is the Wildest?") +
+  theme(legend.title = element_blank(),axis.text.x = element_text(angle = 45, size =14))
+  
+
+
+
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
