@@ -31,5 +31,9 @@ tail (gapminder)
 ```
 
 ```{r}
-summary (gapminder)
+summary (gapminder)  #summary stats
+names (gapminder)    #column names
+dim(gapminder)       #dimensions
+ncol(gapminder)      #number of columns
+nrow(gapminder)      #number of rows
 ```
