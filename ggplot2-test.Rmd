@@ -2,7 +2,10 @@
 title: "graphics with ggplot2"
 author: "Christin Khan"
 date: "October 22, 2018"
-output: html_document
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 ---
 
 # Learning ggplot2
@@ -13,9 +16,8 @@ We're learning ggplot2 It's going to be amazing!
 
 
 ```{r}
-
 # install and load tidyverse which is a package of packages
-install.packages("tidyverse")
+#install.packages("tidyverse")
 library(tidyverse)
 ```
 
@@ -47,7 +49,7 @@ mass <- read.csv("https://raw.githubusercontent.com/OHI-Science/data-science-tra
 
 head(se)
 
-View(SE)
+View(se)
 
 
 ```
@@ -109,7 +111,7 @@ ggplot(data = acadia, aes(x = year, y = visitors, color=park_name)) +
   geom_point() +
   geom_line() +
   geom_smooth() +
-  theme_minimalist()
+  theme_minimal()
 
 ```
 # bar charts + how to name and save your ggplot

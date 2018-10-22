@@ -1,0 +1,35 @@
+---
+title: "wrangling"
+author: "Christin Khan"
+date: "October 22, 2018"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+#install packages
+
+```{r}
+library(tidyverse)  # install.packages("tidyverse")
+```
+
+#read in data
+
+```{r}
+## read gapminder csv. Note the readr:: prefix identifies which package it's in
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv')
+```
+
+#look at the data
+
+```{r}
+head(gapminder) 
+```
+```{r}
+tail (gapminder)
+```
+
+```{r}
+summary (gapminder)
+```
