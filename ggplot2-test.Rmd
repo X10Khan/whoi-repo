@@ -68,3 +68,60 @@ ggplot(data = se) +
 
 ```
 
+```{r}
+
+ggplot(data = se) +
+  geom_point(aes(x = year, y = visitors)) +
+  facet_wrap(~ state, scales = "free") +
+  theme_void()
+
+```
+
+
+```{r}
+
+ggplot(data = se) +
+  geom_jitter(aes(x = park_name, y = visitors, color = park_name), alpha = 0.4, width = 0.1) +
+  theme_void() + coord_flip()
+
+```
+```{r}
+
+ggplot(data = se) +
+  geom_violin(aes(x = park_name, y = visitors)) +
+  theme_void()
+
+```
+
+```{r}
+
+ggplot(se) +
+  geom_line(aes(x = year, y = visitors, color=park_name)) +
+  theme_bw()
+
+```
+# multiple geoms on one plot
+
+
+```{r}
+
+ggplot(data = acadia, aes(x = year, y = visitors, color=park_name)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth() +
+  theme_minimalist()
+
+```
+# bar charts + how to name and save your ggplot
+
+```{r}
+
+myplot <- ggplot(data = visit_16, aes(x = state, y = visitors)) +
+geom_bar(stat = "identity")
+
+myplot
+
+ggsave("myplot.png", myplot)
+
+
+```
