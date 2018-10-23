@@ -147,4 +147,52 @@ lf <- left_join(gap_2007, co2, by = "country")
 ```
 
 
+```{r}
+library(tidyverse)
+
+## wide format
+gap_wide <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder_wide.csv')
+
+## yesterday's format
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv')
+```
+#look at data
+```{r}
+head(gap_wide)
+str(gap_wide)
+```
+#start to gather
+```{r}
+gap_long <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values)
+
+```
+# exercise
+
+```{r}
+gap_long %>% 
+  group_by(continent, obs_type) %>%
+    summarize(means = mean(obs_values))
+cont <- gap_long %>% 
+  filter(obs_type == "lifeExp", 
+         year > 1980) %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_le = mean(obs_values))
+ggplot(data = cont, aes(x = year, y = mean_le, color = continent)) + 
+  geom_line() +
+  labs(title = "Mean life expectancy",
+       x = "Year",
+       y = "Age (years)") 
+## Additional customization
+ggplot(data = cont, aes(x = year, y = mean_le, color = continent)) + 
+  geom_line() +
+  labs(title = "Mean life expectancy",
+       x = "Year",
+       y = "Age (years)",
+       color = "Continent") +
+  theme_classic() +
+  scale_fill_brewer(palette = "Blues")  
+```
+```
 
