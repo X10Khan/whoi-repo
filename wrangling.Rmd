@@ -3,7 +3,8 @@ title: "wrangling"
 author: "Christin Khan"
 date: "October 22, 2018"
 output:
-  word_document: default
+  word_document: 
+    fig_caption: yes
   pdf_document: default
   html_document: default
 ---
@@ -81,8 +82,6 @@ head(gap_cambodia)
 
 #mutate adds new variables
 ```{r}
-gapminder %>% 
-  mutate(index = 1:nrow(gapminder))
 
 gapminder %>% 
   mutate(planet = "Earth")
@@ -99,3 +98,34 @@ gapminder %>%
   
 
 ```
+
+#Groups!
+
+```{r echo=TRUE}
+##with mutate()
+gap_grouped <- gapminder %>% 
+  group_by(country) %>%
+  mutate(gdp = pop * gdpPercap,
+         max_gdp = max(gdp)) %>% 
+  ungroup()
+View(gap_grouped)
+
+##with summarize() or summarise()
+gap_summarized <- gapminder %>% 
+  group_by(country) %>% 
+  mutate(gdp = pop * gdpPercap) %>% 
+  summarize(max_gdp = max(gdp)) %>% 
+  ungroup()
+```
+
+## 'arrange()' arranges columns
+
+```{r}
+gap_summarized <- gapminder %>% 
+  group_by(country) %>% 
+  mutate(gdp = pop * gdpPercap) %>% 
+  summarize(max_gdp = max(gdp)) %>% 
+  ungroup() %>% 
+  arrange(desc(max_gdp))
+```
+
